@@ -1,0 +1,771 @@
+Story : Food Delivery App
+
+Epic : To setup Microservice & UI application 
+
+____________________________________________________________________________
+
+ 
+User Story - 1: To give the documentation for the rest points created 
+Effort Estimation : 2 
+AC:
+
+Given the application is successfully running 
+When the application to be tested for dry run with end point /api/*
+Then the swagger document to be shown for the stake holder 
+And the url http://<ipaddress>:<port>/swagger-ui.html 
+And there should be single window to list the documentation for all the microservices written 
+And the swagger document to be accessed from any system which is connected with VPN / System part of the PS Network 
+
+
+____________________________________________________________________________
+
+
+
+User Story-2: containerising the application and testing with swagger 
+Effort Estimation : 2 
+AC: 
+
+Given as the number of microservices which are written getting more  day by day 
+And the complexity is increased the product owner wants the containarization of the application 
+When the application needs to be deployed & to be deployed on the container 
+And the container type to be used is docker 
+Given the source code is given under https://xxx.yyy.com/github/projects/xxx-xxx-xxx 
+When the build is run from Jenkins which is on the VPN IP : xxx.xxx.xxx.xxx
+Then the existing container which are running on the docker should be deleted 
+Then the build to be taken place which recretes the containers 
+And invoke any end point of the application with swagger 
+
+
+
+
+
+
+____________________________________________________________________________
+
+
+User Story-3: setting up quality gateway in sonarqube and excluding untested files 
+Effort Estimation : 2 
+AC: 
+
+Given the sonarqube is running on https://tools.yyy.com/sonar/ 
+And you have necessary projects created 
+When the build is completed refer: User Stody-2 (containarizing the application and testing with swagger )
+Then sonar report to be shown in the jenkins dashboard so that the product owner shall 
+    see how many builds have happened and sonar coverage 
+But if the coverage is less than 80% 
+Then the build should fail (means the docker image not be built)
+
+
+
+
+
+
+User Story-4: creating the mongo replication and connecting the containers (docker)
+Effort Estimation : 2 
+AC
+____________________________________________________________________________
+Given the application is working 
+When the database goes down for various reasons 
+Then there should be a backup of the database 
+And the database instance to be containarized 
+And the number instance to be started with 1 primary and 2 secondary 
+And MongoDB to have port numbers (27017,27018,27019) 
+And the replica set name to be sapRs 
+
+Note: Prepare a shell script (filename.sh) upon invoking the mongo setup should be up 
+
+
+
+
+
+UserStory 5: error pipeline in MS Teams (Apply for services)
+Effort Estimation : 1 
+AC: 
+____________________________________________________________________________
+Given the application is built with CI/CD (Jenkins)
+When the application build fails 
+Then the error logs to be sent to MS Teams channel Called "APP-ERROR" 
+Configure for (services / UI builds)
+
+
+
+____________________________________________________________________________
+ 
+User Story-6: setup husky for react js application 
+Effort Estimation :1
+
+since the application is build at large scale it is very important the developers shall
+ keep the code clean in this regard you are expected to setup husky 
+
+Refer: https://www.npmjs.com/package/husky
+
+
+
+____________________________________________________________________________
+ 
+User Story-7: Create reactjs application with atom molecule organism design system react js application 
+Effort Estimation :2
+
+Create a ReactJS application which shall adhere to atom molecule organism design system 
+react js application, and seed on the bitbucket as a scafolded version and run a simple test case using Testing Library 
+
+
+____________________________________________________________________________
+ 
+User Story-8: Setup Quality gate way on PS Sonar 
+Effort Estimation :1
+
+
+When the applicaiton is written the same application has to check for the valid test case and 
+code coverage report to be generated, for the same, setup sonar qube for the application and 
+the code coverage to be reflected in the:  https://tools.aaa.com/sonar/
+
+
+Prerequisites--
+--
+-- reusable components, repository in bitbucket,  
+--Eureka server, API gateways, basecode to be ready-->run on  cloud, swagger for endpoint
+-- sonarcube--> 
+-- IDE--> google code formatter-- 
+-- Payment-> setup, wiremock
+--JWT is compulsary
+--login-- two factor authentication--(optional)
+--email notification-
+
+____________________________________________________________________________
+
+
+User Story-9: Customer registration (Service)
+Effort Estimation : 1 
+AC
+____________________________________________________________________________
+Given the  application is running on http://<ipaddress>:<port>/
+When the end point is POST /api/registration 
+Then the payload to be accepted is 
+	{
+		email:String, 
+		password: String, 
+		firstName: String, 
+		lastName: String, 
+		dob:date 
+	} 
+When made a request with Postman/ rest client / swagger 
+Then the data model to be shown which is created with ID 
+And with status code 201 
+
+
+Note: RMM Level 3 Guide lines 
+
+___________________________________________________________________________
+
+
+User Story-10: Creating UX design (Figma/Any UX Tool)
+Effort Estimation :2
+
+Title- UI: Design the wireframes and mock-ups for each page 
+Description: Designing the wireframes and mockups for each page 
+AC: 
+Given a list of pages: 
+-       Customer Page Registration
+-		Customer page login /OTP
+- 	
+-       Customer Dashboard 
+-		Customer Cart add / view / edit food/s
+- 		Customer Food Selection in dashboard
+-       Customer profile view  
+- 		Customer profile Update (popup)
+-       Home Page-Welcome Page
+- 		Customer Search based on food item 
+- 		Cusotmer search based on reastaurant 
+-		-----------------customer search based on location  (remove this)
+-		customer view on home page and post login page to show most trending (food item[most bought, most rated etc])
+-		customer view on home page and post login page to show most trending (restaurant [most bought, most rated etc])
+-		Customer order page 
+-		customer payment page 
+- 		customer cancel page (should be only be)
+-		Customer track an order 
+
+
+
+Create wireframes and mock-ups for each of the pages for all screen sizes 
+
+And the design should be consistent with the style guide 
+
+
+_______________________________________________________________________________________________
+
+
+________________________________________________________________________________________
+------------------------------------Customer-POD 1 and 2 (4+4)--------------------------------
+________________________________________________________________________________________
+BE:
+1) Auth-Service
+AC: 
+Given the  application is running on http://<ipaddress>:<port>/
+When the end point is POST /api/registration 
+Then the payload to be accepted is 
+	{
+		email:String, 
+		password: String, 
+		firstName: String, 
+		lastName: String, 
+		dob:date   (Refer to DB)
+	} 
+When made a request with Postman/ rest client / swagger 
+Then the data model to be shown which is created with ID 
+And with status code 201 
+
+
+2)Order and payment service
+
+AC: 
+Given the  application is running on http://<ipaddress>:<port>/
+When the end point is POST /api/registration 
+Then the payload to be accepted is 
+	{
+		email:String, 
+		password: String, 
+		firstName: String, 
+		lastName: String, 
+		dob:date   (Refer to DB)
+	} 
+When made a request with Postman/ rest client / swagger 
+Then the data model to be shown which is created with ID 
+And with status code 201 
+
+3)Search service
+
+FE:
+
+
+
+
+
+_______________________________________________________________________________________
+
+
+
+________________________________________________________________________________________
+------------------------------------Merchant-POD 3 (4 participants)--------------------
+________________________________________________________________________________________
+1) Merchant-Service
+
+
+
+
+
+
+
+
+_______________________________________________________________________________________
+
+________________________________________________________________________________________
+------------------------------------Admin-POD 4 (5 participants)-----------------------
+________________________________________________________________________________________
+1) Develop end points to disaply on required data on dashboard
+   -- use serch-service
+   -- graphical dispaly of total orders vs cuisine
+   -- graphical dispaly of total merchant vs cuisine
+   --More requirements to be finalized
+
+2)
+
+
+
+_______________________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+________________________________________________________________________________
+User Story-10: Creating UX design (Figma/Any UX Tool)
+Effort Estimation :1
+
+Title- UI: Design the wireframes and mock-ups for each page 
+Description: Designing the wireframes and mockups for each page 
+AC: 
+Given a list of pages: 
+- admin home page  to see the overall sales (Mechant wise,Food category wise)
+  --Graphical GUI 
+
+- Mercahnt page (For CRUD operations)
+	
+	--Merchant page login /OTP
+	--Mercahnt Register
+	--Add details of food item
+	--logout 
+
+
+
+Create wireframes and mock-ups for each of the pages for all screen sizes 
+
+And the design should be consistent with the style guide 
+_________________________________________________________________________________
+
+
+
+
+
+
+________________________________________________________________________________
+User Story-11: Creating UX design (Figma/Any UX Tool)
+Effort Estimation :1
+
+Title- UI: Design the wireframes and mock-ups for each page 
+Description: Designing the wireframes and mockups for each page 
+AC: 
+Given a list of pages: 
+- admin home page  to see the overall sales (Mechant wise,Food category wise)
+  --Graphical GUI 
+- Develop the 
+
+Create wireframes and mock-ups for each of the pages for all screen sizes 
+
+And the design should be consistent with the style guide 
+_________________________________________________________________________________
+
+
+
+
+
+
+
+
+____________________________________________________________________________
+ 
+User Story-12: Create Spring Boot application for Discovery service, API Gateway(with predicates), Admin, Customer, Marketer and write test case (service layer, controller, mock DAO Layer)
+Effort Estimation :2
+
+Create spring boot application which shall have the basic end point of /api/ which shall give a acknowledgement as "up", and seed the same to the bitbucket repository. 
+
+Note: 
+1. you are expected to have all the microservices registered under discovery service + API Gateway 
+2. Use Java 17 
+3. Spring boot 3.2.1
+
+
+
+Ref: https://github.com/aaa/bbb/ccc
+
+
+
+
+
+
+
+____________________________________________________________________________
+
+User Story-13: Setup gatling for the end points 
+Effort Estimation :1
+AC: 
+Given the end point/s for the application in sprint-0 
+When invoked with the end point 
+Then there should be a test bed setup using gatling for test the application for perfomance 
+And the test should generate the report for Sanity Test (1 Test for all end points)
+And spike test (max volume 1000) 
+And stress test (max volumd 1000 over duration of 5,10,15 seconds)
+
+Note: report should show case OK, KO values at 95%, 99%, if you have have real users configure virtual users 
+
+
+
+
+
+
+
+
+____________________________________________________________________________
+
+ 
+
+User Story-14: Customer registration (UI)
+Effort Estimation : 1 
+AC: 
+Given the web application is running on http://<ipaddress>:<port>/
+And on top right corner the link is clicked "Register" 
+Then new page to be opened which will ask for 
+    email : should be valid format of email 
+When email format is not valid (preferably use onblur)
+Then Error Message to be shown next to email field "Please enter valid email"
+And Password : should have atleast 1 special character and number of characters to be 6 
+And accept firstname and LastName which is minimum 6 characters
+And only alphabets 
+And The date filed should not be editable (ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date)
+And Sex to be selected as radio button from the list : MALE | FEMALE| OTHER 
+When all the fields entered are valid 
+Then submit button to be enabled
+When clicked on "Submit" button 
+Then a message to be shown "Thank You for registering with us, please verify from your registered email" 
+
+Note: Only registration shall not make customer to enter to the application, for this need to validate with OTP 
+
+
+
+
+
+____________________________________________________________________________
+
+User Story-14: Customer Registration (UI) - OTP 
+Effort Estimation : 1 
+AC: 
+Given the web application is running on http://<ipaddress>:<port>/
+When the customer has registered successfully 
+Then the application should generate the OTP (Email based)
+And send an email to the registered one 
+When user get an OTP 
+Then he/she should be able to put the OTP in the application 
+When the OTP is validated 
+Then the application shall allow customer to goto home page / dashboard page 
+And show Welcome "<Customer Name>" on top right corner 
+When hover on top of it 
+Then the font to be 1.2px 
+
+Note: Use email client (open source only)
+
+
+____________________________________________________________________________
+
+User Story-14: Customer Registration Service - valid case
+Effort Estimation : 1 
+
+AC1: 
+When the application is running  http://<ipaddress>:<port>/
+And the end point invoked is POST /api/registration/validate
+{
+	email:"email address"
+}
+Then the email to be triggered for the email 
+And should have a random number (OTP)
+
+
+AC2: 
+When the application is running  http://<ipaddress>:<port>/
+And the end point invoked is POST /api/registration/validate/otp
+{
+	email:"email address", 
+	otp: "number"
+}
+Then the application shall validate the email/ OTP are correct 
+And the application shall set the status of the customer as active 
+
+Note: by default the customer status to be inactive
+
+____________________________________________________________________________
+
+User Story-15: Admin Login Service - valid case
+Effort Estimation : 3 
+
+AC1: 
+When the application is running  http://admin.<ipaddress>:<port>/
+And the end point invoked is POST /api/admin
+{
+	email:"email address" 
+	Password:"password" 
+}
+
+AC2: 
+When the application is running  http://<ipaddress>:<port>/
+And the end point invoked is POST /api/admin
+{
+	email:"email address", 
+	password:"password"   //validated from DB
+}
+Then the application shall validate the email/password are correct 
+And the application shall set the status of the admin as active 
+
+Note: by default the admin status to be inactive
+
+_________________________________________________________________________________________
+
+
+
+
+
+____________________________________________________________________________
+
+User Story-14: Merchant CRUD Service - valid case
+Effort Estimation :  4
+
+AC1: 
+When the application is running  http://<ipaddress>:<port>/
+And the end point invoked is POST /api/registration/validate
+-- provide merchant name, GST, location, category , serving time, mobile number.
+--Add merchant
+--Update merchant
+--Get Merchant
+--delete merchant (For future use)
+____________________________________________________________________________
+
+
+
+
+____________________________________________________________________________
+
+User Story-14: Customer Orders- CRUD Service - valid case
+Effort Estimation :  4
+
+AC1: 
+When the application is running  http://<ipaddress>:<port>/
+And the end point invoked is POST /api/order/
+-- provide customer name, GST, location, category , serving time, mobile number.
+--Add customer
+--Update customer
+--Get customer
+--delete customer 
+____________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+____________________________________________________________________________
+Upcoming
+____________________________________________________________________________
+
+1.	Admin—Pod1
+2.	Customer—Pod 2 
+3.	Merchant—Pod 3
+4.	Customer Support—Pod4
+5.	Common—Pod 5
+
+
+
+User Story-15: homepage 
+__________________________________________________________________
+homepage :
+__________________________________________________________________
+
+1.	Customer Registration:
+Customer can register themselves by providing name, age, gender, food preference(veg/nonveg) , pin code, mobile number, 
+email and address.
+
+
+2.	Merchant Registration:
+Merchant can register themselves by providing merchant name, GST, location, category , serving time, mobile number.
+
+3.	Login
+Users can use there username, password for login
+
+4.	Product search
+Customer can search products based on the name, restaurant.
+
+5.	Trending Service
+Trending service shows the top5 products and restaurant  which are popular on the given day.
+
+
+
+User Story-16: 
+______________________________________________________
+Merchant
+______________________________________________________
+1.	Product Onboarding/Updating
+Each merchant can enrol up to 10 products. They can add ,delete update products any number of times
+ 
+
+
+
+
+
+
+User Story-17: 
+___________________________________________________________________
+Customer
+___________________________________________________________________
+
+1.	Product Listing:
+Product listing the default products which are shown to customer after the login successfully.
+ Customer
+
+2.	Order Processing and Payment.
+Once the customer has selected the products and finalised quality , he can place order and do a payment using a third party system.
+
+
+
+
+
+User Story-18: 
+__________________________________________________________________
+Admin ( -- to be discussed)
+___________________________________________________________________
+
+Support dashboard mainly used the customer support team for tracking order, status, 
+sales tracking and generating reports. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+__________________________________________________________________
+Customer Support
+__________________________________________________________________
+1.	Support Dashboard
+Support dashboard mainly used the customer support team for tracking order, status, sales 
+tracking and generating reports(to be moved to admin).
